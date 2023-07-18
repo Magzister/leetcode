@@ -1,13 +1,16 @@
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        if numRows == 1:
+        if numRows == 1 or numRows >= len(s):
             return s
-        rows = ['' for _ in range(numRows)]
-        row_index = 0
+
+        rows = [''] * numRows
+        index, step = 0, 1
         for ch in s:
-            rows[row_index] += ch
-            if row_index < numRows - 1:
-                row_index += 1
-            elif row_index > 0:
-                row_index -= 1
+            rows[index] += ch
+            if index == 0:
+                step = 1
+            elif index == numRows - 1:
+                step = -1
+            index += step
+
         return ''.join(rows)
